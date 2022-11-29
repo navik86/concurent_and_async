@@ -1,6 +1,6 @@
 import time
-from get_methods_from_url import get_methods
-from multiprocessing import Pool
+from sync_files import get_methods_from_url as gmfu
+from multiprocessing.dummy import Pool as ThreadPool
 
 urls = [
   'http://www.python.org',
@@ -14,16 +14,17 @@ urls = [
 ]
 
 # Make the Pool of workers
-pool = Pool(8)
+pool = ThreadPool(8)
 
 # Open the URLs in their own threads
 # and return the results
 start_time = time.time()
-results = pool.map(get_methods, urls)
-print(results)
+
+results = pool.map(gmfu, urls)
+
 # Close the pool and wait for the work to finish
 pool.close()
 pool.join()
 
 end_time = time.time() - start_time
-print(f"\nExecution time: {end_time} seconds")
+print(f"\nTreads: {end_time} seconds")

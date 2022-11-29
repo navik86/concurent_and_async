@@ -1,5 +1,5 @@
 import time
-from async_func import get_methods_from_url
+from sync_files import get_methods_from_url as gmfu
 from multiprocessing import Pool
 
 urls = [
@@ -13,15 +13,18 @@ urls = [
   'https://wiki.python.org/moin/',
 ]
 
+# Make the Pool of workers
 pool = Pool(8)
 
-
+# Open the URLs in their own threads
+# and return the results
 start_time = time.time()
-results = pool.map(get_methods_from_url, urls)
 
+results = pool.map(gmfu, urls)
 
+# Close the pool and wait for the work to finish
 pool.close()
 pool.join()
 
 end_time = time.time() - start_time
-print(f"\nExecution time: {end_time} seconds")
+print(f"\nProcess: {end_time} seconds")
