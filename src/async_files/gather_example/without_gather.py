@@ -23,7 +23,7 @@ async def main(*args):
     await task2
 
 
-if __name__ == "__maint__":
+if __name__ == "__main__":
 
     start_time = time.time()
     asyncio.run(main(3, 4))

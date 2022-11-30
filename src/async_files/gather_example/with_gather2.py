@@ -16,8 +16,7 @@ async def fun2(x):
 
 async def main(*args):
     a, b = args
-    results = asyncio.gather(fun1(a), fun2(b))
-    await results
+    results = await asyncio.gather(fun1(a), fun2(b))
 
 
 if __name__ == "__main__":
